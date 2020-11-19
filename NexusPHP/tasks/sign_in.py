@@ -13,7 +13,11 @@ from NexusPHP.utility.function import now
 def signIn(session,url):
 
     # 完整签到url
-    attendanceUrl = url + '/attendance.php'
+    if url == "https://pt.btschool.club/":
+        attendanceUrl = 'https://pt.btschool.club/index.php?action=addbonus'
+    else:
+        attendanceUrl = url + '/attendance.php'
+    #attendanceUrl = url + '/attendance.php'
     with session.get(attendanceUrl) as res:
         r = re.compile(r'签到已得\d+')
         tip = r.search(res.text).group() if r.search(res.text) else res.text
